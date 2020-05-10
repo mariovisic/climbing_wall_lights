@@ -1,11 +1,13 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    kgio (2.11.3)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     rack (2.2.2)
     rack-protection (2.0.8.1)
       rack
+    raindrops (0.19.1)
     ruby2_keywords (0.0.2)
     sequel (5.32.0)
     sinatra (2.0.8.1)
@@ -18,6 +20,9 @@ GEM
       sinatra (>= 0.9.4)
     sqlite3 (1.4.2)
     tilt (2.0.10)
+    unicorn (5.5.5)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
 
 PLATFORMS
   ruby
@@ -26,6 +31,7 @@ DEPENDENCIES
   sinatra
   sinatra-sequel
   sqlite3
+  unicorn
 
 BUNDLED WITH
    2.1.4

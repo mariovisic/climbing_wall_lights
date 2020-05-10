@@ -1,6 +1,8 @@
 require 'bundler'
 Bundler.require
 
-get '/' do
-  "Hello World!"
+class ClimbingWallLightsApplication < Sinatra::Base
+  get '/' do
+    "Hello World!"
+  end
 end
