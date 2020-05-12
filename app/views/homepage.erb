@@ -1,14 +1,10 @@
-<div class="container-fluid">
-  <% Wall::VERTICAL.times do |y| %>
+<div class="container">
+  <% Wall::VERTICAL.downto(0) do |y| %>
     <div class="row">
       <% Wall::HORIZONTAL.times do |x| %>
         <span class="border">
-        <form method="post" action="/toggle-light/<%= x %>/<%= y %>">
-          <% if Wall.on?(x, y) %>
-            <input type="submit" class="btn btn-primary" value="&nbsp;">
-          <% else %>
-            <input type="submit" class="btn btn-light" value="&nbsp;">
-          <% end %>
+        <form method="post" class="toggleLight" action="/toggle-light/<%= x %>/<%= y %>">
+          <input type="submit" class="btn <%= Wall.button_css_for(x, y) %>" value="&nbsp;">
         </form>
         </span>
       <% end %>
