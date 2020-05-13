@@ -1,0 +1,19 @@
+.wall-light-cell {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.wall-light {
+  width: 100%;
+}
+.wall-light[data-state="on"] {
+  background: blue;
+}
+
+.wall-light[data-state="start"] {
+  background: green;
+}
+
+.wall-light[data-state="finish"] {
+  background: red;
+}

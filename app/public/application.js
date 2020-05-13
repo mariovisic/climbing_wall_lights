@@ -1,9 +1,10 @@
+let buttonStates = ['off', 'on', 'start', 'finish']
+
 document.querySelectorAll('form.toggleLight').forEach(form => {
   form.addEventListener('submit', event => {
-    if(event.target.querySelector('input[type="submit"]').className.includes('btn-light')) {
-      // Remove btn-light from the button
-    } else {
-      // Add btn-light from the button
-    }
+    // TODO: Submit form via AJAX if it has an action :) 
+    let button = event.target.querySelector('input[type="submit"]');
+    let index = buttonStates.indexOf(button.getAttribute('data-state'))
+    button.setAttribute('data-state', buttonStates[index + 1]);
   })
 })

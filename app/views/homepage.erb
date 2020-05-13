@@ -2,10 +2,12 @@
   <% Wall::VERTICAL.downto(0) do |y| %>
     <div class="row">
       <% Wall::HORIZONTAL.times do |x| %>
-        <span class="border">
-        <form method="post" class="toggleLight" action="/toggle-light/<%= x %>/<%= y %>">
-          <input type="submit" class="btn <%= Wall.button_css_for(x, y) %>" value="&nbsp;">
-        </form>
+        <div class="col-1 px-0">
+          <span class="border wall-light-cell">
+          <form method="post" class="toggleLight" action="/toggle-light/<%= x %>/<%= y %>">
+            <input type="submit" data-state="<%= Wall.current_state(x, y) %>" class="wall-light btn" value="&nbsp;">
+          </form>
+        </div>
         </span>
       <% end %>
     </div>
