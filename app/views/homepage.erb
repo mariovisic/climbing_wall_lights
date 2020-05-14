@@ -1,15 +1,26 @@
-<div class="container">
-  <% Wall::VERTICAL.downto(0) do |y| %>
-    <div class="row">
-      <% Wall::HORIZONTAL.times do |x| %>
-        <div class="col-1 px-0">
-          <span class="border wall-light-cell">
-          <form method="post" class="toggleLight" action="/toggle-light/<%= x %>/<%= y %>">
-            <input type="submit" data-state="<%= Wall.current_state(x, y) %>" class="wall-light btn" value="&nbsp;">
-          </form>
-        </div>
-        </span>
-      <% end %>
-    </div>
-  <% end %>
+<h1 class="text-center mb-4 pb-4">Lights</h1>
+<% Wall::VERTICAL.downto(0) do |y| %>
+  <div class="row">
+    <% Wall::HORIZONTAL.times do |x| %>
+      <div class="col-1 px-0">
+        <span class="border wall-light-cell">
+        <form method="post" class="toggleLight" action="/toggle-light/<%= x %>/<%= y %>">
+          <input type="submit" data-state="<%= Wall.current_state(x, y) %>" class="wall-light btn" value="&nbsp;">
+        </form>
+      </div>
+      </span>
+    <% end %>
+  </div>
+
+<% end %>
+
+<div class="row mt-4">
+  <form method="post" action = "/lights-off" class="pr-4">
+    <input type="submit" class="btn btn-danger" value="All Off">
+  </form>
+
+  <form method="post" action = "/lights-on">
+    <input type="submit" class="btn btn-primary" value="All On">
+  </form>
+
 </div>

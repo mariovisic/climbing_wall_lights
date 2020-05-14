@@ -8,7 +8,18 @@
   <link rel="stylesheet" href="/application.css">
 </head>
 <body>
-  <%= yield %>
+  <div class="container px-0 pb-4">
+    <nav class="navbar navbar-expand navbar-dark bg-primary">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Lights</a></li>
+        <li class="nav-item"><a class="nav-link" href="/routes">Routes</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <%= yield %>
+  </div>
   <script src="/application.js"></script>
 </body>
 </html>

@@ -14,4 +14,16 @@ class Wall
   def self.toggle(x, y)
     @@state["#{x},#{y}"] = STATES[STATES.find_index(self.current_state(x, y)) + 1]
   end
+
+  def self.turn_all_off
+    @@state = { }
+  end
+
+  def self.turn_all_on
+    (0..HORIZONTAL).each do |x|
+      (0..VERTICAL).each do |y|
+        @@state["#{x},#{y}"] = 'on'
+      end
+    end
+  end
 end

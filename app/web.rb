@@ -16,4 +16,19 @@ class ClimbingWallLightsApplication < Sinatra::Base
     status 200
     body ''
   end
+
+  post '/lights-off' do
+    Wall.turn_all_off
+
+
+    redirect '/'
+  end
+
+  post '/lights-on' do
+    Wall.turn_all_on
+
+
+    redirect '/'
+  end
+
 end
