@@ -12,6 +12,8 @@ class ClimbingWallLightsApplication < Sinatra::Base
 
   post '/toggle-light/:x/:y' do
     Wall.toggle(params[:x], params[:y])
-    redirect '/'
+
+    status 200
+    body ''
   end
 end
