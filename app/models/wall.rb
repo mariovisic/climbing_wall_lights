@@ -26,4 +26,12 @@ class Wall
       end
     end
   end
+
+  def self.x_y_to_position(x, y)
+    if x.even?
+      (VERTICAL * x) + (y + 1)
+    else
+      (VERTICAL * x) + (VERTICAL - y)
+    end
+  end
 end
