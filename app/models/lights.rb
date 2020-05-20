@@ -14,13 +14,13 @@ class Lights
   private
 
   def indexes_for(state)
-    [].tap do |values|
+    ([].tap do |values|
       state_array.each_with_index do |value, index|
         if value == state
           values.push(index)
         end
       end
-    end
+    end).join(',')
   end
 
   def state_array
@@ -33,11 +33,10 @@ class Lights
   end
 
   def shell_out
-    puts `sudo ON="#{indexes_for('on')}" FINISH="#{indexes_for('finish')}" START="#{indexes_for('start')}" ../bin/set_lights`
+    `sudo ON="#{indexes_for('on')}" FINISH="#{indexes_for('finish')}" START="#{indexes_for('start')}" ./bin/set_lights`
   end
 
   def x_y_to_position(x, y)
-    puts "pos: #{x} #{y}"
     if x.odd?
       (Wall::VERTICAL * (Wall::HORIZONTAL - x - 1)) + (y)
     else
