@@ -1,7 +1,7 @@
 <h1 class="text-center mb-4 pb-4">Lights</h1>
-<% Wall::VERTICAL.downto(0) do |y| %>
+<% (Wall::VERTICAL - 1).downto(0) do |y| %>
   <div class="row">
-    <% Wall::HORIZONTAL.times do |x| %>
+    <% (Wall::HORIZONTAL).times do |x| %>
       <div class="col-1 px-0">
         <span class="border wall-light-cell">
         <form method="post" class="toggleLight" action="/toggle-light/<%= x %>/<%= y %>">

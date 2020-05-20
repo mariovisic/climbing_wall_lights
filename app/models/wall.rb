@@ -13,25 +13,27 @@ class Wall
 
   def self.toggle(x, y)
     @@state["#{x},#{y}"] = STATES[STATES.find_index(self.current_state(x, y)) + 1]
+
+    set_lights
   end
 
   def self.turn_all_off
     @@state = { }
+
+    set_lights
   end
 
   def self.turn_all_on
-    (0..HORIZONTAL).each do |x|
-      (0..VERTICAL).each do |y|
+    (0..HORIZONTAL - 1).each do |x|
+      (0..VERTICAL - 1).each do |y|
         @@state["#{x},#{y}"] = 'on'
       end
     end
+
+    set_lights
   end
 
-  def self.x_y_to_position(x, y)
-    if x.even?
-      (VERTICAL * x) + (y + 1)
-    else
-      (VERTICAL * x) + (VERTICAL - y)
-    end
+  def self.set_lights
+    Lights.set(@@state)
   end
 end

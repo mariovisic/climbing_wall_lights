@@ -4,6 +4,7 @@ Bundler.require
 $LOAD_PATH.push(__dir__)
 
 require 'models/wall'
+require 'models/lights'
 
 class ClimbingWallLightsApplication < Sinatra::Base
   get '/' do
