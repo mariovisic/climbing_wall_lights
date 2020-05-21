@@ -1,7 +1,7 @@
 class Lights
   GPIO_PIN = 18
 
-  RED = Ws2812::Color.new(0, 0xff, 0, 0)
+  RED = Ws2812::Color.new(0, 0xff, 0)
   GREEN = Ws2812::Color.new(0xff, 0, 0)
   BLUE = Ws2812::Color.new(0, 0, 0xff)
   OFF = Ws2812::Color.new(0, 0, 0)
