@@ -23,6 +23,7 @@ GEM
     unicorn (5.5.5)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    ws2812 (0.0.7)
 
 PLATFORMS
   ruby
@@ -32,6 +33,7 @@ DEPENDENCIES
   sinatra-sequel
   sqlite3
   unicorn
+  ws2812
 
 BUNDLED WITH
    2.1.4

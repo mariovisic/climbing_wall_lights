@@ -1,39 +1,47 @@
 class Lights
+  GPIO_PIN = 18
+
+  RED = Ws2812::Color.new(0, 0xff, 0, 0)
+  GREEN = Ws2812::Color.new(0xff, 0, 0)
+  BLUE = Ws2812::Color.new(0, 0, 0xff)
+  OFF = Ws2812::Color.new(0, 0, 0)
+
+  STATES = {
+    'off' => OFF,
+    'on' => BLUE,
+    'start' => GREEN,
+    'finish' => RED
+  }
+
   def self.set(state)
     new(state).set
   end
 
   def initialize(state)
     @state = state
+    @lights = Ws2812::Basic.new(Wall::HORIZONTAL * Wall::VERTICAL, GPIO_PIN)
   end
 
   def set
-    shell_out
+    @lights.open
+
+    state_array.each_with_index do |value, index|
+      @lights[index] = STATES[value]
+    end
+
+    @lights.show
+    @lights.close
   end
 
   private
 
-  def indexes_for(state)
-    ([].tap do |values|
-      state_array.each_with_index do |value, index|
-        if value == state
-          values.push(index)
-        end
-      end
-    end).join(',')
-  end
-
   def state_array
-    @state_array ||= [].tap do |array|
+    Array.new(@lights.count, 'off').tap do |array|
       @state.each do |key, value|
         x,y = key.split(',').map(&:to_i)
         array[x_y_to_position(x, y)] = value
       end
     end
-  end
-
-  def shell_out
-    `sudo ON="#{indexes_for('on')}" FINISH="#{indexes_for('finish')}" START="#{indexes_for('start')}" ./bin/set_lights`
   end
 
   def x_y_to_position(x, y)
