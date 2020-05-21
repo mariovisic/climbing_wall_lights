@@ -6,7 +6,7 @@ class Wall
   STATES = ['off', 'on', 'start', 'finish']
 
   @@state = { }
-  @@brightness = 50
+  @@brightness = 128
 
   def self.brightness
     @@brightness
