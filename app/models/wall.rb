@@ -6,6 +6,15 @@ class Wall
   STATES = ['off', 'on', 'start', 'finish']
 
   @@state = { }
+  @@brightness = 50
+
+  def self.brightness
+    @@brightness
+  end
+
+  def self.brightness=(brightness)
+    @@brightness = brightness
+  end
 
   def self.current_state(x, y)
     @@state["#{x},#{y}"] || DEFAULT_STATE
@@ -34,6 +43,6 @@ class Wall
   end
 
   def self.set_lights
-    Lights.set(@@state)
+    Lights.set(@@state, @@brightness)
   end
 end

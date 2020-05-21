@@ -13,13 +13,13 @@ class Lights
     'finish' => RED
   }
 
-  def self.set(state)
-    new(state).set
+  def self.set(state, brightness)
+    new(state, brightness).set
   end
 
-  def initialize(state)
+  def initialize(state, brightness)
     @state = state
-    @lights = Ws2812::Basic.new(Wall::HORIZONTAL * Wall::VERTICAL, GPIO_PIN)
+    @lights = Ws2812::Basic.new(Wall::HORIZONTAL * Wall::VERTICAL, GPIO_PIN, brightness)
   end
 
   def set

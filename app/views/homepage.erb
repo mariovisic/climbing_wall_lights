@@ -1,4 +1,5 @@
 <h1 class="text-center mb-4 pb-4">Lights</h1>
+
 <% (Wall::VERTICAL - 1).downto(0) do |y| %>
   <div class="row">
     <% (Wall::HORIZONTAL).times do |x| %>
@@ -11,8 +12,18 @@
       </span>
     <% end %>
   </div>
-
 <% end %>
+
+<div class="row mt-5">
+  <div class="col-12 px-0">
+    <form method="post" action="/set-brightness" class="mb-4 setBrightness">
+      <div class="form-group">
+        <label for="brightness">Brightness</label>
+        <input type="range" name="brightness" min="0" max="100" value="<%= Wall.brightness %>" class="form-control-range brightnessSlider">
+      </div>
+    </form>
+  </div>
+</div>
 
 <div class="row mt-4">
   <form method="post" action = "/lights-off" class="pr-4">
@@ -22,5 +33,4 @@
   <form method="post" action = "/lights-on">
     <input type="submit" class="btn btn-primary" value="All On">
   </form>
-
 </div>

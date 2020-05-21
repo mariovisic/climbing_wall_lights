@@ -10,3 +10,11 @@ document.querySelectorAll('form.toggleLight').forEach(form => {
     button.setAttribute('data-state', buttonStates[index + 1]);
   })
 })
+
+document.querySelector('input.brightnessSlider').addEventListener('change', (event) => {
+  let form = document.querySelector('form.setBrightness')
+  let formData = new FormData();
+  formData.append('brightness', event.target.value);
+
+  fetch(form.action, { method: 'POST', body: formData })
+})

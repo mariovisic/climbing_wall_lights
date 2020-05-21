@@ -36,4 +36,11 @@ class ClimbingWallLightsApplication < Sinatra::Base
 
     redirect '/'
   end
+
+  post '/set-brightness' do
+    Wall.brightness = params['brightness'].to_i
+
+    status 200
+    body ''
+  end
 end
