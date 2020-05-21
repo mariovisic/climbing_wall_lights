@@ -1,10 +1,17 @@
 require 'bundler'
-Bundler.require
+
+RACK_ENV = ENV.fetch('RACK_ENV', 'development').to_sym
+
+Bundler.require(:default, RACK_ENV)
 
 $LOAD_PATH.push(__dir__)
 
 require 'models/wall'
-require 'models/lights'
+if RACK_ENV == :production
+  require 'models/lights'
+else
+  require 'models/dummy_lights'
+end
 
 class ClimbingWallLightsApplication < Sinatra::Base
   get '/' do
@@ -21,15 +28,12 @@ class ClimbingWallLightsApplication < Sinatra::Base
   post '/lights-off' do
     Wall.turn_all_off
 
-
     redirect '/'
   end
 
   post '/lights-on' do
     Wall.turn_all_on
 
-
     redirect '/'
   end
-
 end
