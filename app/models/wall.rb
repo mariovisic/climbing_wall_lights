@@ -14,6 +14,8 @@ class Wall
 
   def self.brightness=(brightness)
     @@brightness = brightness
+
+    set_lights
   end
 
   def self.current_state(x, y)
