@@ -6,7 +6,7 @@ document.querySelectorAll('form.toggleLight').forEach(form => {
     fetch(form.action, { method: 'POST' })
 
     let button = event.target.querySelector('input[type="submit"]');
-    let index = buttonStates.indexOf(button.getAttribute('data-state'))
+    let index = Math.max(0, buttonStates.indexOf(button.getAttribute('data-state')))
     button.setAttribute('data-state', buttonStates[index + 1]);
   })
 })
