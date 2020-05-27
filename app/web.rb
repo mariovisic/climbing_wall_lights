@@ -6,7 +6,11 @@ Bundler.require(:default, RACK_ENV)
 
 $LOAD_PATH.push(__dir__)
 
+require 'sinatra'
+require 'database'
+
 require 'models/wall'
+require 'models/route'
 if RACK_ENV == :production
   require 'models/lights'
 else
@@ -18,6 +22,14 @@ Wall.play_boot_sequence
 class ClimbingWallLightsApplication < Sinatra::Base
   get '/' do
     erb :homepage
+  end
+
+  get '/routes' do
+    erb :routes, locals: { routes: Route.all }
+  end
+
+  get '/routes/new' do
+    erb :new_route
   end
 
   post '/toggle-light/:x/:y' do
