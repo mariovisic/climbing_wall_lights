@@ -3,10 +3,17 @@ class Wall
   VERTICAL = 15
   DEFAULT_STATE = 'off'
 
+  # NOTE: The lights can go up to 255 for max brightness but they consume a lot
+  # of current doing this and so it puts strain on the power supply for little
+  # visual difference compared to 50% Lowering the max brightness also helps
+  # colour uniformity especially as the LED strings get longer, so we can avoid
+  # having to re-inject power so often if we reduce the maximum to 160/255
+  MAX_BRIGHTNESS = 160
+
   STATES = ['off', 'on', 'start', 'finish']
 
   @@state = { }
-  @@brightness = 128
+  @@brightness = MAX_BRIGHTNESS / 2
 
   def self.brightness
     @@brightness

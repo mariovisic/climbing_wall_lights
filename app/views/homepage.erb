@@ -19,7 +19,7 @@
     <form method="post" action="/set-brightness" class="mb-4 setBrightness">
       <div class="form-group">
         <label for="brightness">Brightness</label>
-        <input type="range" name="brightness" min="0" max="255" value="<%= Wall.brightness %>" class="form-control-range brightnessSlider">
+        <input type="range" name="brightness" min="0" max="<%= Wall::MAX_BRIGHTNESS %>" value="<%= Wall.brightness %>" class="form-control-range brightnessSlider">
       </div>
     </form>
   </div>
