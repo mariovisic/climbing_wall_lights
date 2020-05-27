@@ -54,4 +54,9 @@ class Wall
   def self.set_lights
     Lights.set(@@state, @@brightness)
   end
+
+  def self.play_boot_sequence
+    # TODO: Create a fun boot sequence :)
+    set_lights
+  end
 end

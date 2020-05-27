@@ -13,6 +13,8 @@ else
   require 'models/dummy_lights'
 end
 
+Wall.play_boot_sequence
+
 class ClimbingWallLightsApplication < Sinatra::Base
   get '/' do
     erb :homepage
