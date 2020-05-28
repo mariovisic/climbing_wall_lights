@@ -18,28 +18,39 @@
   background: red;
 }
 
+
+.route-difficulty {
+  border: 1px solid;
+}
+
 .route-difficulty-unknown {
-  background: orange;
+  background: rgba(255, 128, 0, 0.25);
+  border-color: rgb(255, 128, 0);
 }
 
 .route-difficulty-1 {
-  background: yellow;
+  background: rgba(200, 200, 0, 0.25);
+  border-color: rgb(200, 200, 0);
 }
 
 .route-difficulty-2 {
-  background: green;
+  background: rgba(0, 200, 0, 0.25);
+  border-color: rgb(0, 200, 0);
 }
 
 .route-difficulty-3 {
-  background: blue;
+  background: rgba(0, 0, 200, 0.25);
+  border-color: rgb(0, 0, 200);
 }
 
 .route-difficulty-4 {
-  background: red;
+  background: rgba(255, 0, 0, 0.25);
+  border-color: rgb(200, 0, 0);
 }
 
 .route-difficulty-5 {
-  background: black;
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgb(0, 0, 0);
   color: white;
 }
 

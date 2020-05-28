@@ -1,10 +1,20 @@
-<a class="btn btn-success" href="/routes/new">New Route</a>
+<div class="row">
+  <div class="col-12 mb-4">
+    <a class="btn btn-success" href="/routes/new">New Route</a>
+  </div>
+</div>
 
-<ul>
-<% routes.each do |route| %>
-  <li class="route-difficulty-<%= route.difficulty || 'unknown' %>">
-    <%= route.title %>
-    <a href="/routes/<%= route.id %>/load" class="btn btn-primary">Load</a>
-  </li>
-<% end %>
-</ul>
+<div class="row">
+  <div class="col-12">
+    <ul class="list-group">
+    <% routes.each do |route| %>
+      <li class="route-difficulty route-difficulty-<%= route.difficulty || 'unknown' %> list-group-item">
+        <div class="float-right">
+          <a href="/routes/<%= route.id %>/load" class="btn btn-dark">Load</a>
+        </div>
+        <h4><%= route.title %></h4>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
