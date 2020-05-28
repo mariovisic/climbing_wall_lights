@@ -51,6 +51,12 @@ class Wall
     set_lights
   end
 
+  def self.load(route)
+    @@state = JSON.load(route.wall_state)
+
+    set_lights
+  end
+
   def self.set_lights
     Lights.set(@@state, @@brightness)
   end

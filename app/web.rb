@@ -34,6 +34,13 @@ class ClimbingWallLightsApplication < Sinatra::Base
     erb :new_route
   end
 
+  get '/routes/:id/load' do
+    route = Route.find(id: params[:id])
+    Wall.load(route)
+
+    redirect '/routes'
+  end
+
   post '/routes' do
     Route.create(params[:route])
 
