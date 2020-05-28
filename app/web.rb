@@ -34,6 +34,12 @@ class ClimbingWallLightsApplication < Sinatra::Base
     erb :new_route
   end
 
+  post '/routes' do
+    Route.create(params[:route])
+
+    redirect '/routes'
+  end
+
   post '/toggle-light/:x/:y' do
     Wall.toggle(params[:x], params[:y])
 

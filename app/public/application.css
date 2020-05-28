@@ -17,3 +17,32 @@
 .wall-light[data-state="finish"] {
   background: red;
 }
+
+.route-difficulty-unknown {
+  background: orange;
+}
+
+.route-difficulty-1 {
+  background: yellow;
+}
+
+.route-difficulty-2 {
+  background: green;
+}
+
+.route-difficulty-3 {
+  background: blue;
+}
+
+.route-difficulty-4 {
+  background: red;
+}
+
+.route-difficulty-5 {
+  background: black;
+  color: white;
+}
+
+.route-difficulty-6 {
+  background: white;
+}

@@ -1,5 +1,7 @@
 require 'sinatra/sequel'
 
+Sequel::Model.plugin :timestamps
+
 set :database, 'sqlite://climbing_wall_lights.db'
 
 migration "create the routes table" do
@@ -10,7 +12,7 @@ migration "create the routes table" do
     text :wall_state, null: false
     text :notes
     timestamp :created_at, null: false
-    timestamp :updated_at, null: false
+    timestamp :updated_at
   end
 end
 

@@ -1,5 +1,7 @@
 <a class="btn btn-success" href="/routes/new">New Route</a>
 
+<ul>
 <% routes.each do |route| %>
-  <%= route.title %>
+  <li class="route-difficulty-<%= route.difficulty || 'unknown' %>"><%= route.title %></li>
 <% end %>
+</ul>
