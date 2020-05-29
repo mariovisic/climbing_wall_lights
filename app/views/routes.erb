@@ -10,7 +10,8 @@
     <% routes.each do |route| %>
       <li class="route-difficulty route-difficulty-<%= route.difficulty || 'unknown' %> list-group-item">
         <div class="float-right">
-          <a href="/routes/<%= route.id %>/load" class="btn btn-dark">Load</a>
+          <a href="/routes/<%= route.id %>/edit" class="btn btn-info mr-2">Edit</a>
+          <a href="/routes/<%= route.id %>/load" class="btn btn-primary">Load</a>
         </div>
         <h4><%= route.title %></h4>
       </li>

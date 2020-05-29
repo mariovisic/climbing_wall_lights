@@ -1,31 +1,5 @@
 <form method="post" action="/routes" class="newRoute">
-  <div class="form-group">
-    <label for="route-title">Title</label>
-    <input type="text" name="route[title]" class="form-control route-title" required>
-  </div>
-
-  <div class="form-group">
-    <label for="route-title">Difficulty</label>
-    <select type="text" name="route[difficulty]" class="form-control route-difficulty">
-      <option>Unknown - Orange</option>
-      <option value="1">Very easy - Yellow</option>
-      <option value="2">Easy - Green</option>
-      <option value="3">Medium - Blue</option>
-      <option value="4">Difficult - Red</option>
-      <option value="5">Very difficult - Black</option>
-      <option value="6">Ridiculous - White</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <%= erb :_light_grid %>
-    <input type="hidden" name="route[wall_state]" class="wall-state-input">
-  </div>
-
-  <div class="form-group">
-    <label for="route-title">Notes</label>
-    <textarea type="text" name="route[notes]" class="form-control route-notes" rows="4"></textarea>
-  </div>
+  <%= erb :_route_form, locals: { route: Route.new } %>
 
   <div class="form-group">
     <input type="submit" class="btn btn-primary" value="Create">

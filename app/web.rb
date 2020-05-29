@@ -20,6 +20,8 @@ end
 Wall.play_boot_sequence
 
 class ClimbingWallLightsApplication < Sinatra::Base
+  set method_override: true
+
   get '/' do
     erb :homepage
   end
@@ -41,8 +43,21 @@ class ClimbingWallLightsApplication < Sinatra::Base
     redirect '/routes'
   end
 
+  get '/routes/:id/edit' do
+    route = Route.find(id: params[:id])
+    Wall.load(route)
+
+    erb :edit_route, locals: { route: route }
+  end
+
   post '/routes' do
     Route.create(params[:route])
+
+    redirect '/routes'
+  end
+
+  put '/routes/:id' do
+    Route.find(id: params[:id]).update(params[:route])
 
     redirect '/routes'
   end

@@ -1,0 +1,10 @@
+<form method="post" action="/routes/<%= route.id %>" class="newRoute">
+  <input type="hidden" name="_method" value="PUT">
+
+  <%= erb :_route_form, locals: { route: route } %>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary" value="Update">
+  </div>
+</form>
+
