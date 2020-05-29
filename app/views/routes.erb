@@ -14,6 +14,9 @@
           <a href="/routes/<%= route.id %>/load" class="btn btn-primary">Load</a>
         </div>
         <h4><%= route.title %></h4>
+        <% if route.notes %>
+          <small><%= route.notes.gsub("\n", '<br />') %></small>
+        <% end %>
       </li>
     <% end %>
     </ul>
