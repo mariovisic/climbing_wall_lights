@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bindata (2.4.7)
+    ffaker (2.15.0)
     kgio (2.11.3)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -18,6 +20,8 @@ GEM
     sinatra-sequel (0.9.0)
       sequel (>= 3.2.0)
       sinatra (>= 0.9.4)
+    spicy-proton (2.1.7)
+      bindata (~> 2.3)
     sqlite3 (1.4.2)
     tilt (2.0.10)
     unicorn (5.5.5)
@@ -29,8 +33,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffaker
   sinatra
   sinatra-sequel
+  spicy-proton
   sqlite3
   unicorn
   ws2812
