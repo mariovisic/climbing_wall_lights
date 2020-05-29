@@ -3,8 +3,14 @@
 
   <%= erb :_route_form, locals: { route: route } %>
 
-  <div class="form-group">
+  <div class="form-group float-right">
     <input type="submit" class="btn btn-primary" value="Update">
   </div>
 </form>
 
+<form method="post" action="/routes/<%= route.id %>" class="deleteRoute">
+  <input type="hidden" name="_method" value="DELETE">
+  <div class="form-group">
+    <input type="submit" class="btn btn-danger" value="Delete this route">
+  </div>
+</form>

@@ -22,7 +22,7 @@ document.querySelectorAll('input.brightnessSlider').forEach(element => {
 })
 
 document.querySelectorAll('form.newRoute').forEach(element => {
-  addEventListener('submit', (event) => {
+  element.addEventListener('submit', (event) => {
     let wallState = {}
     document.querySelectorAll('.wall-light').forEach(light => {
       state = light.getAttribute('data-state')
@@ -31,5 +31,13 @@ document.querySelectorAll('form.newRoute').forEach(element => {
       }
     })
     document.querySelector('.wall-state-input').value = JSON.stringify(wallState)
+  })
+})
+
+document.querySelectorAll('form.deleteRoute').forEach(element => {
+  element.addEventListener('submit', (event) => {
+    if(!confirm("Sure you want to delete this route?")) {
+      event.preventDefault()
+    }
   })
 })

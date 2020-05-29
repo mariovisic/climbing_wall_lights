@@ -62,6 +62,13 @@ class ClimbingWallLightsApplication < Sinatra::Base
     redirect '/routes'
   end
 
+  delete '/routes/:id' do
+    Route.find(id: params[:id]).delete
+
+    redirect '/routes'
+  end
+
+
   post '/toggle-light/:x/:y' do
     Wall.toggle(params[:x], params[:y])
 
