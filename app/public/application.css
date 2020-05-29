@@ -23,14 +23,14 @@
   border: 1px solid;
 }
 
-.route-difficulty-unknown {
+.route-difficulty-unknown, .route-difficulty-0 {
   background: rgba(255, 128, 0, 0.25);
   border-color: rgb(255, 128, 0);
 }
 
 .route-difficulty-1 {
-  background: rgba(200, 200, 0, 0.25);
-  border-color: rgb(200, 200, 0);
+  background: rgba(255, 255, 50, 0.25);
+  border-color: rgb(210, 210, 0);
 }
 
 .route-difficulty-2 {
