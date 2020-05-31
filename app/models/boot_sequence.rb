@@ -4,9 +4,6 @@ class Lights
   RED = Ws2812::Color.new(0, 0xff, 0)
   GREEN = Ws2812::Color.new(0xff, 0, 0)
   BLUE = Ws2812::Color.new(0, 0, 0xff)
-  WHITE = Ws2812::Color.new(0xff, 0xff, 0xff)
-  LIGHT_GREY = Ws2812::Color.new(128, 128, 128)
-  DARK_GREY = Ws2812::Color.new(60, 60, 60)
   OFF = Ws2812::Color.new(0, 0, 0)
 
   STATES = {
@@ -19,11 +16,6 @@ class Lights
   def self.set(state, brightness)
     new(state, brightness).set
   end
-
-  def self.play_boot_sequence(brightness)
-    new({}, brightness).play_boot_sequence
-  end
-
 
   def initialize(state, brightness)
     @state = state
@@ -58,22 +50,5 @@ class Lights
     else
       (Wall::VERTICAL * (Wall::HORIZONTAL - x - 1)) + (Wall::VERTICAL - y - 1)
     end
-  end
-
-  def play_boot_sequence
-    @lights.open
-
-    image = ChunkyPNG::Image.from_file('./assets/image.png')
-
-    WALL::VERTICAL.times do |y|
-      WALL::HORIZONTAL.times do |x|
-        colour = image[x][y]
-        @lights[x_y_to_position(x, y)] = Ws2812::Color.new(colour.g, colour.r, colour.b)
-      end
-    end
-
-    @lights.show
-    sleep 1
-    @lights.close
   end
 end

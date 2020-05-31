@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     bindata (2.4.7)
+    chunky_png (1.3.11)
     ffaker (2.15.0)
     kgio (2.11.3)
     mustermann (1.1.1)
@@ -33,6 +34,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chunky_png
   ffaker
   sinatra
   sinatra-sequel

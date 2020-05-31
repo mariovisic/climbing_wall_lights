@@ -62,7 +62,8 @@ class Wall
   end
 
   def self.play_boot_sequence
-    # TODO: Create a fun boot sequence :)
+    Lights.play_boot_sequence(@@brightness)
+
     set_lights
   end
 end
