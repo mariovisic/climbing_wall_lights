@@ -3,8 +3,8 @@
 <%= erb :_light_grid %>
 
 <div class="row mt-5">
-  <div class="col-12 px-0">
-    <form method="post" action="/set-brightness" class="mb-4 setBrightness">
+  <div class="col-12">
+    <form method="post" action="/set-brightness" class="mb-4 form setBrightness">
       <div class="form-group">
         <label for="brightness">Brightness</label>
         <input type="range" name="brightness" min="0" max="<%= Wall::MAX_BRIGHTNESS %>" value="<%= Wall.brightness %>" class="form-control-range brightnessSlider">
@@ -13,12 +13,14 @@
   </div>
 </div>
 
-<div class="row mt-4">
-  <form method="post" action = "/lights-off" class="pr-4">
-    <input type="submit" class="btn btn-danger" value="All Off">
-  </form>
+<div class="row mt-4 mb-4">
+  <div class="col">
+    <form method="post" class="form-single-button" action="/lights-off">
+      <input type="submit" class="btn btn-danger" value="All Off">
+    </form>
 
-  <form method="post" action = "/lights-on">
-    <input type="submit" class="btn btn-primary" value="All On">
-  </form>
+    <form method="post" class="form-single-button" action="/lights-on">
+      <input type="submit" class="btn btn-primary" value="All On">
+    </form>
+  </div>
 </div>

@@ -18,7 +18,6 @@
   background: red;
 }
 
-
 .route-difficulty {
   border: 1px solid;
 }
@@ -56,4 +55,8 @@
 
 .route-difficulty-6 {
   background: white;
+}
+
+.form-single-button {
+  display: inline-block;
 }
