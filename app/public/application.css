@@ -1,10 +1,10 @@
 .wall-light-col {
-  height: 37px;
+  height: 35px;
 }
 
 @media (min-width: 576px) {
   .wall-light-col {
-    height: 47px;
+    height: 45px;
   }
 }
 
