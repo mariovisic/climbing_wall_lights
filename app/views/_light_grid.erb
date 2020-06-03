@@ -1,7 +1,7 @@
 <% (Wall::VERTICAL - 1).downto(0) do |y| %>
   <div class="row px-3">
     <% (Wall::HORIZONTAL).times do |x| %>
-      <div class="col-1 px-0">
+      <div class="col-1 px-0 wall-light-col">
         <span class="border wall-light-cell">
           <button type="submit" data-state="<%= Wall.current_state(x, y) %>" data-action="/toggle-light/<%= x %>/<%= y %>" data-key="<%= "#{x},#{y}" %>" class="wall-light btn">&nbsp;</button>
         </span>
