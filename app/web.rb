@@ -94,4 +94,10 @@ class ClimbingWallLightsApplication < Sinatra::Base
     status 200
     body ''
   end
+
+  post '/toggle-power' do
+    Wall.toggle_power
+
+    redirect '/'
+  end
 end

@@ -16,6 +16,14 @@
         <li class="nav-item"><a class="nav-link" href="/">Lights</a></li>
         <li class="nav-item"><a class="nav-link" href="/routes">Routes</a></li>
       </ul>
+
+      <form method="post" action="/toggle-power" class="ml-auto">
+        <% if Wall.powered_on %>
+          <input type="submit" href="/routes" value="Power Off" class="btn btn-danger">
+        <% else %>
+          <input type="submit" href="/routes" value="Power On" class="btn btn-success">
+        <% end %>
+      </form>
     </nav>
   </div>
 

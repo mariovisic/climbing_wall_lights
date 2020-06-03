@@ -12,6 +12,7 @@ class Wall
 
   STATES = ['off', 'on', 'start', 'finish']
 
+  @@powered_on = true
   @@state = { }
   @@brightness = MAX_BRIGHTNESS / 2
 
@@ -27,6 +28,20 @@ class Wall
 
   def self.current_state(x, y)
     @@state["#{x},#{y}"] || DEFAULT_STATE
+  end
+
+  def self.powered_on
+    @@powered_on
+  end
+
+  def self.toggle_power
+    if @@powered_on
+      set_lights({})
+    else
+      set_lights
+    end
+
+    @@powered_on = !@@powered_on
   end
 
   def self.toggle(x, y)
@@ -57,8 +72,8 @@ class Wall
     set_lights
   end
 
-  def self.set_lights
-    Lights.set(@@state, @@brightness)
+  def self.set_lights(state=@@state)
+    Lights.set(state, @@brightness)
   end
 
   def self.play_boot_sequence
