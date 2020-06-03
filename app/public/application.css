@@ -71,3 +71,10 @@
 .form-single-button {
   display: inline-block;
 }
+
+.btn-xl {
+  padding: 1em 1.5em;
+  font-size: 2em;
+  line-height: normal;
+  border-radius: 0.3em;
+}
