@@ -13,7 +13,7 @@ class Lights
     'finish' => RED
   }
 
-  TURN_ON_OFF_FADE_TIME = 2.0
+  TURN_ON_OFF_FADE_TIME = 1.0
 
   def initialize(state, brightness)
     @state = state
