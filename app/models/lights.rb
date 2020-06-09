@@ -4,6 +4,7 @@ class Lights
   RED = Ws2812::Color.new(0, 0xff, 0)
   GREEN = Ws2812::Color.new(0xff, 0, 0)
   BLUE = Ws2812::Color.new(0, 0, 0xff)
+  WHITE = Ws2812::Color.new(0xff, 0xff, 0xff)
   OFF = Ws2812::Color.new(0, 0, 0)
 
   STATES = {
@@ -56,15 +57,19 @@ class Lights
     if @lights.brightness > 0
       @lights.open
 
-      state_array.each_with_index do |value, index|
-        @lights[index] = STATES[value]
-      end
+      delay = TURN_ON_OFF_FADE_TIME / @lights.count
 
-      brightness = @lights.brightness
-      delay = TURN_ON_OFF_FADE_TIME / @lights.brightness
+      0.upto(@lights.count+4) do |index|
+        index.downto([index - 4, 0].max) do |inner_index|
+          if inner_index < @lights.count
+            @lights[inner_index] = WHITE
+          end
+        end
 
-      0.upto(brightness) do |step_brightness|
-        @lights.brightness = step_brightness
+        if index - 5 >= 0
+          @lights[index - 5] = STATES[state_array[index - 5]]
+        end
+
         @lights.show
         sleep(delay)
       end
