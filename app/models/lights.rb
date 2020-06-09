@@ -14,7 +14,8 @@ class Lights
     'finish' => RED
   }
 
-  TURN_ON_OFF_FADE_TIME = 1.0
+  TURN_ON_ANIMATION_TIME = 2.0
+  TURN_OFF_ANIMATION_TIME = 1.0
 
   def initialize(state, brightness)
     @state = state
@@ -41,7 +42,7 @@ class Lights
       end
 
       brightness = @lights.brightness
-      delay = TURN_ON_OFF_FADE_TIME / @lights.brightness
+      delay = TURN_OFF_ANIMATION_TIME / @lights.brightness
 
       brightness.downto(0) do |step_brightness|
         @lights.brightness = step_brightness
@@ -57,7 +58,7 @@ class Lights
     if @lights.brightness > 0
       @lights.open
 
-      delay = TURN_ON_OFF_FADE_TIME / @lights.count
+      delay = TURN_ON_ANIMATION_TIME / @lights.count
 
       0.upto(@lights.count+4) do |index|
         index.downto([index - 4, 0].max) do |inner_index|
