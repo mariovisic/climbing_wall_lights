@@ -13,9 +13,7 @@ class Lights
     'finish' => RED
   }
 
-  def self.set(state, brightness)
-    new(state, brightness).set
-  end
+  TURN_ON_OFF_FADE_TIME = 2.0
 
   def initialize(state, brightness)
     @state = state
@@ -31,6 +29,48 @@ class Lights
 
     @lights.show
     @lights.close
+  end
+
+  def turn_off
+    if @lights.brightness > 0
+      @lights.open
+
+      state_array.each_with_index do |value, index|
+        @lights[index] = STATES[value]
+      end
+
+      brightness = @lights.brightness
+      delay = TURN_ON_OFF_FADE_TIME / @lights.brightness
+
+      brightness.downto(0) do |step_brightness|
+        @lights.brightness = step_brightness
+        @lights.show
+        sleep(delay)
+      end
+
+      @lights.close
+    end
+  end
+
+  def turn_on
+    if @lights.brightness > 0
+      @lights.open
+
+      state_array.each_with_index do |value, index|
+        @lights[index] = STATES[value]
+      end
+
+      brightness = @lights.brightness
+      delay = TURN_ON_OFF_FADE_TIME / @lights.brightness
+
+      0.upto(brightness) do |step_brightness|
+        @lights.brightness = step_brightness
+        @lights.show
+        sleep(delay)
+      end
+
+      @lights.close
+    end
   end
 
   private

@@ -12,7 +12,7 @@ class Wall
 
   STATES = ['off', 'on', 'start', 'finish']
 
-  @@powered_on = true
+  @@powered_on = false
   @@state = { }
   @@brightness = MAX_BRIGHTNESS / 2
 
@@ -23,7 +23,7 @@ class Wall
   def self.brightness=(brightness)
     @@brightness = brightness
 
-    set_lights
+    Lights.new(@@state, @@brightness).set
   end
 
   def self.current_state(x, y)
@@ -36,9 +36,9 @@ class Wall
 
   def self.toggle_power
     if @@powered_on
-      set_lights({})
+      Lights.new(@@state, @@brightness).turn_off
     else
-      set_lights
+      Lights.new(@@state, @@brightness).turn_on
     end
 
     @@powered_on = !@@powered_on
@@ -47,13 +47,13 @@ class Wall
   def self.toggle(x, y)
     @@state["#{x},#{y}"] = STATES[STATES.find_index(self.current_state(x, y)) + 1]
 
-    set_lights
+    Lights.new(@@state, @@brightness).set
   end
 
   def self.turn_all_off
     @@state = { }
 
-    set_lights
+    Lights.new(@@state, @@brightness).set
   end
 
   def self.turn_all_on
@@ -63,21 +63,12 @@ class Wall
       end
     end
 
-    set_lights
+    Lights.new(@@state, @@brightness).set
   end
 
   def self.load(route)
     @@state = JSON.load(route.wall_state)
 
-    set_lights
-  end
-
-  def self.set_lights(state=@@state)
-    Lights.set(state, @@brightness)
-  end
-
-  def self.play_boot_sequence
-    # TODO: Create a fun boot sequence :)
-    set_lights
+    Lights.new(@@state, @@brightness).set
   end
 end

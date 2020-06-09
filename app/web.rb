@@ -17,8 +17,6 @@ else
   require 'models/dummy_lights'
 end
 
-Wall.play_boot_sequence
-
 class ClimbingWallLightsApplication < Sinatra::Base
   set method_override: true
 
