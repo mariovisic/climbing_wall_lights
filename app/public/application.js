@@ -7,7 +7,7 @@ document.querySelectorAll('.wall-light').forEach(button => {
     fetch(button.getAttribute('data-action'), { method: 'POST' })
 
     let index = Math.max(0, buttonStates.indexOf(button.getAttribute('data-state')))
-    button.setAttribute('data-state', buttonStates[index + 1]);
+    button.setAttribute('data-state', buttonStates[index + 1] || 'off');
   })
 })
 
