@@ -29,8 +29,6 @@ class ClimbingWallLightsApplication < Sinatra::Base
   end
 
   get '/routes/new' do
-    Wall.turn_all_off
-
     erb :new_route
   end
 
