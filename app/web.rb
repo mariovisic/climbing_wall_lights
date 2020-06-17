@@ -20,6 +20,13 @@ end
 class ClimbingWallLightsApplication < Sinatra::Base
   set method_override: true
 
+  before '/*' do
+    if !Wall.powered_on && !([[''], ['toggle-power']].include?(params[:splat]))
+      puts params.inspect
+      redirect '/'
+    end
+  end
+
   get '/' do
     erb :homepage
   end
