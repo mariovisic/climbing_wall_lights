@@ -1,5 +1,5 @@
 <form method="post" action="/routes" class="newRoute">
-  <%= erb :_route_form, locals: { route: Route.new } %>
+  <%= erb :_route_form, locals: { route: route } %>
 
   <div class="form-group">
     <input type="submit" class="btn btn-primary" value="Create">

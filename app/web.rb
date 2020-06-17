@@ -29,7 +29,9 @@ class ClimbingWallLightsApplication < Sinatra::Base
   end
 
   get '/routes/new' do
-    erb :new_route
+    route = Route.new(title: [Spicy::Proton.adjective(max: 8).capitalize, FFaker::AnimalUS.common_name].join(' '))
+
+    erb :new_route, locals: { route: route }
   end
 
   get '/routes/:id/load' do
