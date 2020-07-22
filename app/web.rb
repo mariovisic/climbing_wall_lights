@@ -32,7 +32,7 @@ class ClimbingWallLightsApplication < Sinatra::Base
   end
 
   get '/routes' do
-    erb :routes, locals: { routes: Route.all }
+    erb :routes, locals: { routes: Route.to_hash_groups(:difficulty) }
   end
 
   get '/routes/new' do

@@ -6,19 +6,22 @@
 
 <div class="row">
   <div class="col-12">
-    <ul class="list-group">
-    <% routes.each do |route| %>
-      <li class="route-difficulty route-difficulty-<%= route.difficulty || 'unknown' %> list-group-item">
-        <div class="float-right">
-          <a href="/routes/<%= route.id %>/edit" class="btn btn-info mr-2">Edit</a>
-          <a href="/routes/<%= route.id %>/load" class="btn btn-primary">Load</a>
-        </div>
-        <h4><%= route.title %></h4>
-        <% if route.notes %>
-          <small><%= route.notes.gsub("\n", '<br />') %></small>
-        <% end %>
-      </li>
+    <% routes.each do |group, routes| %>
+      <h5 class="route-difficulty-title"><%= Route::DIFFICULTIES[group] %></h5>
+      <ul class="list-group mb-4">
+      <% routes.each do |route| %>
+        <li class="route-difficulty route-difficulty-<%= route.difficulty || 'unknown' %> list-group-item">
+          <div class="float-right">
+            <a href="/routes/<%= route.id %>/edit" class="btn btn-info mr-2">Edit</a>
+            <a href="/routes/<%= route.id %>/load" class="btn btn-primary">Load</a>
+          </div>
+          <h4 class="route-title"><%= route.title %></h4>
+          <% if route.notes != '' %>
+            <small><%= route.notes.gsub("\n", '<br />') %></small>
+          <% end %>
+        </li>
+      <% end %>
+      </ul>
     <% end %>
-    </ul>
   </div>
 </div>

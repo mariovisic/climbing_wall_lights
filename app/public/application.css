@@ -18,15 +18,15 @@
   height: 100%;
 }
 .wall-light[data-state="on"] {
-  background: blue;
+  background: var(--cyan);
 }
 
 .wall-light[data-state="start"] {
-  background: green;
+  background: var(--green);
 }
 
 .wall-light[data-state="finish"] {
-  background: red;
+  background: var(--red);
 }
 
 .route-difficulty {
@@ -77,4 +77,11 @@
   font-size: 2em;
   line-height: normal;
   border-radius: 0.3em;
+}
+
+.route-difficulty-title {
+}
+
+.bg-primary {
+  background: 'pink' !important;
 }
