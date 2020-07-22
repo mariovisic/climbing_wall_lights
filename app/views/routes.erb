@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-12">
-    <% routes.each do |group, routes| %>
+    <% routes.sort.each do |group, routes| %>
       <h5 class="route-difficulty-title"><%= Route::DIFFICULTIES[group] %></h5>
       <ul class="list-group mb-4">
       <% routes.each do |route| %>
