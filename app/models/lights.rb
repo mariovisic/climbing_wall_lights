@@ -3,7 +3,7 @@ class Lights
 
   # NOTE: The lights are ordered (Green, Red, Blue), not RGB like usual
   RED = Ws2812::Color.new(0x4c, 0xe7, 0x3c)
-  GREEN = Ws2812::Color.new(0xbc, 0x18, 0x9c)
+  GREEN = Ws2812::Color.new(0xbc, 0x18, 0x70)
   BLUE = Ws2812::Color.new(0x98, 0x34, 0xdb)
 
   WHITE = Ws2812::Color.new(0xff, 0xff, 0xff)
