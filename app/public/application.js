@@ -41,3 +41,25 @@ document.querySelectorAll('form.deleteRoute').forEach(element => {
     }
   })
 })
+
+
+document.querySelectorAll('.load-route-link').forEach(link => {
+  link.text = link.getAttribute('data-text')
+
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    document.querySelectorAll('.load-route-link').forEach(otherLink => {
+      otherLink.text = link.getAttribute('data-text')
+    })
+
+    let loadingSpan = document.createElement('span');
+    loadingSpan.className = 'spinner-border spinner-border-sm mx-2';
+    link.text = ''
+    link.prepend(loadingSpan);
+    fetch(link.getAttribute('href')).then(() => {
+      link.removeChild(loadingSpan);
+      link.text = link.getAttribute('data-loaded-text');
+    })
+  })
+})
