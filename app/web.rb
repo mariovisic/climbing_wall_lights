@@ -88,6 +88,10 @@ class ClimbingWallLightsApplication < Sinatra::Base
     erb :game, locals: { speed: params[:speed] }
   end
 
+  get '/route-generator/new' do
+    erb :new_route_generator
+  end
+
   post '/toggle-light/:x/:y' do
     Wall.toggle(params[:x], params[:y])
 
