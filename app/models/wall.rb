@@ -26,8 +26,28 @@ class Wall
     Lights.new(@@state, @@brightness).set
   end
 
-  def self.current_state(x, y)
+  def self.set(x, y, state)
+    @@state["#{x},#{y}"] = state
+
+    Lights.new(@@state, @@brightness).set
+  end
+
+  def self.get(x, y)
     @@state["#{x},#{y}"] || DEFAULT_STATE
+  end
+
+  def self.turn_random_red(number)
+    available_lights = []
+
+    (0..HORIZONTAL - 1).each do |x|
+      (0..VERTICAL - 1).each do |y|
+        if get(x, y) == 'off'
+          available_lights.push([x, y])
+        end
+      end
+    end
+
+    available_lights.shuffle.first(number.to_i).each { |light| set(*light, 'finish') }
   end
 
   def self.powered_on
@@ -45,9 +65,7 @@ class Wall
   end
 
   def self.toggle(x, y)
-    @@state["#{x},#{y}"] = STATES[STATES.find_index(self.current_state(x, y)) + 1]
-
-    Lights.new(@@state, @@brightness).set
+    set(x, y, STATES[STATES.find_index(get(x, y)) + 1])
   end
 
   def self.turn_all_off

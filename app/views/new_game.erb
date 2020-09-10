@@ -1,0 +1,22 @@
+<h1 class="text-center mb-4 pb-4">Climbing Game</h1>
+
+<h4>Instructions</h4>
+<p>Players each take a turn to climb the wall, to start with any holds can be used. Once a player completes an ascent then they can press the button below which will eliminate either some holds from the wall, making it more difficult for the next ascent. Players are eliminated when they cannot complete an ascent.</p>
+
+<form method="post" action="/game" class="gameForm">
+
+  <div class="form-group">
+    <label for="route-title">Speed</label>
+    <select type="text" name="speed" class="form-control">
+      <option value="1">Very slow (Remove one hold each ascent)</option>
+      <option value="2">Slow (Remove 2 holds each ascent)</option>
+      <option value="3" selected>Normal (Remove 3 each ascent)</option>
+      <option value="4">Fast (Remove 4 holds each ascent)</option>
+      <option value="5">Very Fast (Remove 5 holds each ascent)</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary" value="Begin">
+  </div>
+</form>

@@ -22,7 +22,6 @@ class ClimbingWallLightsApplication < Sinatra::Base
 
   before '/*' do
     if !Wall.powered_on && !([[''], ['toggle-power']].include?(params[:splat]))
-      puts params.inspect
       redirect '/'
     end
   end
@@ -73,6 +72,21 @@ class ClimbingWallLightsApplication < Sinatra::Base
     redirect '/routes'
   end
 
+  get '/game/new' do
+    erb :new_game
+  end
+
+  post '/game' do
+    Wall.turn_all_off
+
+    erb :game, locals: { speed: params[:speed] }
+  end
+
+  put '/game' do
+    Wall.turn_random_red(params[:speed])
+
+    erb :game, locals: { speed: params[:speed] }
+  end
 
   post '/toggle-light/:x/:y' do
     Wall.toggle(params[:x], params[:y])
