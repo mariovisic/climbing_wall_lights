@@ -11,6 +11,7 @@ require 'database'
 
 require 'models/wall'
 require 'models/route'
+require 'models/route_generator'
 if RACK_ENV == :production
   require 'models/lights'
 else
@@ -42,14 +43,14 @@ class ClimbingWallLightsApplication < Sinatra::Base
 
   get '/routes/:id/load' do
     route = Route.find(id: params[:id])
-    Wall.load(route)
+    Wall.load(JSON.load(route.wall_state))
 
     redirect '/routes'
   end
 
   get '/routes/:id/edit' do
     route = Route.find(id: params[:id])
-    Wall.load(route)
+    Wall.load(JSON.load(route.wall_state))
 
     erb :edit_route, locals: { route: route }
   end
@@ -97,6 +98,16 @@ class ClimbingWallLightsApplication < Sinatra::Base
 
     status 200
     body ''
+  end
+
+  get '/route-generator/new' do
+    erb :new_route_generator
+  end
+
+  post '/route-generator' do
+    Wall.load(RouteGenerator.generate(params[:difficulty]))
+
+    erb :new_route_generator, locals: { difficulty: params[:difficulty] }
   end
 
   post '/lights-off' do
