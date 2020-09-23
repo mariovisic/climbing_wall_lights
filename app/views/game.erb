@@ -1,15 +1,23 @@
 <h1 class="text-center mb-4 pb-4">Climbing Game</h1>
 
-<form method="post" action="/game" class="text-align-center align-items-center gameForm">
-   <input type="hidden" name="_method" value="PUT">
-   <input type="hidden" name="speed" value="<%= speed %>">
 
-  <div class="form-group">
-    <div class="mx-auto text-center">
+<div class="form-group">
+  <div class="mx-auto text-center">
+    <form method="post" action="/game/reset" class="text-align-center align-items-center game-form">
+      <input type="hidden" name="speed" value="<%= speed %>">
+
+      <input type="submit" class="btn btn-danger btn-lg mb-4 mr-5" value="Reset">
+    </form>
+
+    <form method="post" action="/game" class="text-align-center align-items-center game-form">
+      <input type="hidden" name="_method" value="PUT">
+      <input type="hidden" name="speed" value="<%= speed %>">
+
       <input type="submit" class="btn btn-success btn-lg mb-4" value="Eliminate <%= speed %> random holds">
-    </div>
+    </form>
   </div>
-</form>
+</div>
+
 
 <% (Wall::VERTICAL - 1).downto(0) do |y| %>
   <div class="row px-3">

@@ -85,3 +85,7 @@
 .bg-primary {
   background: 'pink' !important;
 }
+
+.game-form {
+  display: inline-block;
+}

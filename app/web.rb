@@ -77,13 +77,17 @@ class ClimbingWallLightsApplication < Sinatra::Base
   end
 
   post '/game' do
-    Wall.turn_all_off
-
     erb :game, locals: { speed: params[:speed] }
   end
 
   put '/game' do
     Wall.turn_random_red(params[:speed])
+
+    erb :game, locals: { speed: params[:speed] }
+  end
+
+  post '/game/reset' do
+    Wall.turn_all_off
 
     erb :game, locals: { speed: params[:speed] }
   end
