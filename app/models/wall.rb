@@ -49,7 +49,7 @@ class Wall
 
     available_lights.shuffle.first(number.to_i).each do |light|
       set(*light, 'on')
-      sleep 1
+      sleep 1.5
       set(*light, 'finish')
     end
   end
