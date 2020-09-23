@@ -47,7 +47,11 @@ class Wall
       end
     end
 
-    available_lights.shuffle.first(number.to_i).each { |light| set(*light, 'finish') }
+    available_lights.shuffle.first(number.to_i).each do |light|
+      set(*light, 'on')
+      sleep 1
+      set(*light, 'finish')
+    end
   end
 
   def self.powered_on
