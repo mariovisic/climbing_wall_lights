@@ -13,7 +13,7 @@ class Lights
   STATES = {
     'off' => OFF,
     'on' => BLUE,
-    'footer' => YELLOW,
+    'feet' => YELLOW,
     'start' => GREEN,
     'finish' => RED
   }
