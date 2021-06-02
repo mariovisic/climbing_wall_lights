@@ -1,7 +1,6 @@
 class RouteGenerator
   STARTING_ROWS = 4..6
-  STARTING_HAND_SPLIT = 2..4
-  CLIMBING_HAND_SPLIT = 2..5
+  HAND_SPLIT_RANGE = 2..4
 
   def initialize(difficulty)
     @difficulty = difficulty
@@ -32,7 +31,7 @@ class RouteGenerator
     starting_row = STARTING_ROWS.to_a.sample
     first_x_start = (0..Wall::HORIZONTAL-1).to_a.sample
     second_x_start_options = ((0..Wall::HORIZONTAL-1).to_a - [first_x_start]).select do |x_position|
-      STARTING_HAND_SPLIT.include?((x_position - first_x_start).abs)
+      HAND_SPLIT_RANGE.include?((x_position - first_x_start).abs)
     end
 
     second_x_position = second_x_start_options.sample
@@ -54,8 +53,8 @@ class RouteGenerator
 
   def positions_above(y)
     positions = []
-    (y..Wall::VERTICAL).each do |y_position|
-      (0..Wall::HORIZONTAL).each do |x_position|
+    (y+1..Wall::VERTICAL-1).each do |y_position|
+      (0..Wall::HORIZONTAL-1).each do |x_position|
         positions.push(Position.new(x_position, y_position))
       end
     end
@@ -91,17 +90,22 @@ class RouteGenerator
     end
 
     def near_top?
-      y >= Wall::VERTICAL - 3
+      y >= Wall::VERTICAL - 2
     end
 
     def lower_than?(position)
-      y < position.y
+      if y == position.y
+        # If left and right hands are equal then randomly select which to move :)
+        rand(2) == 0
+      else
+        y < position.y
+      end
     end
 
     def in_range?(other_hand)
       distance_to_other_hand = ((((x - other_hand.x).abs ** 2) + ((y - other_hand.y).abs ** 2)) ** 0.5)
 
-      self != other_hand && CLIMBING_HAND_SPLIT.include?(distance_to_other_hand)
+      self != other_hand && HAND_SPLIT_RANGE.include?(distance_to_other_hand)
     end
 
     def to_s
