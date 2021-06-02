@@ -33,7 +33,6 @@ class RouteGenerator
   end
 
   def set(position, state)
-    puts "Setting: #{position} to #{state}"
     @state[position.to_s] = state
 
     position
@@ -68,11 +67,7 @@ class RouteGenerator
 
     position = positions.sample
 
-    if position.near_top?
-      @hands[move_hand] = set(position, 'finish')
-    else
-      @hands[move_hand] = set(position, 'on')
-    end
+    @hands[move_hand] = set(position, position.near_top? ? 'finish' : 'on')
   end
 
   class Position
