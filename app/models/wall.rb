@@ -10,8 +10,6 @@ class Wall
   # having to re-inject power so often if we reduce the maximum to 160/255
   MAX_BRIGHTNESS = 160
 
-  STATES = ['off', 'on', 'start', 'finish']
-
   @@powered_on = false
   @@state = { }
   @@brightness = MAX_BRIGHTNESS / 2
