@@ -105,9 +105,9 @@ class ClimbingWallLightsApplication < Sinatra::Base
   end
 
   post '/route-generator' do
-    Wall.load(RouteGenerator.generate(params[:difficulty]))
+    Wall.load(RouteGenerator.generate)
 
-    erb :new_route_generator, locals: { difficulty: params[:difficulty] }
+    erb :new_route_generator
   end
 
   post '/lights-off' do

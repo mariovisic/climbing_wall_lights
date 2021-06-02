@@ -1,16 +1,8 @@
 <h1 class="text-center mb-4 pb-4">Route Generator</h1>
 
 <form method="post" action="/route-generator" class="form">
-  <div class="mb-4">
-    <label for="difficulty">Difficulty</label>
-    <select class="form-select" name="difficulty">
-      <option value="2"<%= 'selected' if defined?(difficulty) && difficulty == '2' %>>Easy</option>
-      <option value="3"<%= 'selected' if defined?(difficulty) && difficulty == '3' %>>Medium</option>
-      <option value="4"<%= 'selected' if defined?(difficulty) && difficulty == '4' %>>Difficult</option>
-    </select>
-  </div>
 
   <div class="mb-4">
-    <input type="submit" class="btn btn-primary" value="Generate">
+    <input type="submit" class="btn btn-primary btn-l" value="Generate">
   </div>
 </form>

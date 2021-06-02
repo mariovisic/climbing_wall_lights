@@ -2,15 +2,14 @@ class RouteGenerator
   STARTING_ROWS = 4..6
   HAND_SPLIT_RANGE = 2..4
 
-  def initialize(difficulty)
-    @difficulty = difficulty
+  def initialize
     @state = { }
     @hands = { }
     @last_position = nil
   end
 
-  def self.generate(difficulty)
-    new(difficulty).generate
+  def self.generate
+    new.generate
   end
 
   def generate
