@@ -92,8 +92,8 @@ class ClimbingWallLightsApplication < Sinatra::Base
     erb :game, locals: { speed: params[:speed] }
   end
 
-  post '/toggle-light/:x/:y' do
-    Wall.toggle(params[:x], params[:y])
+  post '/set-light/:x/:y' do
+    Wall.set(params[:x], params[:y], params[:state])
 
     status 200
     body ''

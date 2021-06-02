@@ -18,6 +18,8 @@
 
 <div class="mb-4">
   <label for="route-wall-state" class="form-label">Holds</label>
+  <%= erb :_light_grid_selector %>
+
   <%= erb :_light_grid %>
   <input type="hidden" name="route[wall_state]" class="wall-state-input">
 </div>

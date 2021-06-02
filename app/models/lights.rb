@@ -5,6 +5,7 @@ class Lights
   RED = Ws2812::Color.new(0x4c, 0xe7, 0x3c)
   GREEN = Ws2812::Color.new(0xbc, 0x18, 0x70)
   BLUE = Ws2812::Color.new(0x98, 0x34, 0xdb)
+  YELLOW = Ws2812::Color.new(0x9f, 0xe7, 0x3c)
 
   WHITE = Ws2812::Color.new(0xff, 0xff, 0xff)
   OFF = Ws2812::Color.new(0, 0, 0)
@@ -12,6 +13,7 @@ class Lights
   STATES = {
     'off' => OFF,
     'on' => BLUE,
+    'footer' => YELLOW,
     'start' => GREEN,
     'finish' => RED
   }

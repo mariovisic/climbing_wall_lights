@@ -3,7 +3,7 @@
     <% (Wall::HORIZONTAL).times do |x| %>
       <div class="col-1 px-0 wall-light-col">
         <span class="border wall-light-cell">
-          <button type="submit" data-state="<%= Wall.get(x, y) %>" data-action="/toggle-light/<%= x %>/<%= y %>" data-key="<%= "#{x},#{y}" %>" class="wall-light btn">&nbsp;</button>
+          <button type="submit" data-state="<%= Wall.get(x, y) %>" data-action="/set-light/<%= x %>/<%= y %>" data-key="<%= "#{x},#{y}" %>" class="wall-light btn">&nbsp;</button>
         </span>
       </div>
     <% end %>

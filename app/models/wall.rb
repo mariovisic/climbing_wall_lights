@@ -68,10 +68,6 @@ class Wall
     @@powered_on = !@@powered_on
   end
 
-  def self.toggle(x, y)
-    set(x, y, STATES[STATES.find_index(get(x, y)) + 1])
-  end
-
   def self.turn_all_off
     @@state = { }
 

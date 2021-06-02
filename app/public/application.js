@@ -1,13 +1,17 @@
-let buttonStates = ['off', 'on', 'start', 'finish']
-
 document.querySelectorAll('.wall-light').forEach(button => {
   button.addEventListener('click', event => {
-
     event.preventDefault();
-    fetch(button.getAttribute('data-action'), { method: 'POST' })
 
-    let index = Math.max(0, buttonStates.indexOf(button.getAttribute('data-state')))
-    button.setAttribute('data-state', buttonStates[index + 1] || 'off');
+    let lightStateButtons = document.querySelectorAll('.wall-light-selector input[type=radio]')
+    let selectedLightStateButton = Array.from(lightStateButtons).find(element => element.checked)
+    let stateToSet = selectedLightStateButton.getAttribute('data-light-state')
+    let currentState = button.getAttribute('data-state')
+    if(stateToSet == currentState) {
+      stateToSet = "off"
+    }
+
+    fetch(button.getAttribute('data-action') + '?state=' + stateToSet, { method: 'POST' })
+    button.setAttribute('data-state', stateToSet);
   })
 })
 
