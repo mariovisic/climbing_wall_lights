@@ -5,7 +5,6 @@ class RouteGenerator
   def initialize
     @state = { }
     @hands = { }
-    @last_position = nil
   end
 
   def self.generate
@@ -19,28 +18,22 @@ class RouteGenerator
       set_hand_hold
     end
 
-    set_last_position
-
     @state
   end
 
   private
 
   def set_start_holds
-    starting_row = STARTING_ROWS.to_a.sample
-    first_x_start = (0..Wall::HORIZONTAL-1).to_a.sample
-    second_x_start_options = ((0..Wall::HORIZONTAL-1).to_a - [first_x_start]).select do |x_position|
-      HAND_SPLIT_RANGE.include?((x_position - first_x_start).abs)
-    end
+    available_starting_positions = available_positions(STARTING_ROWS.begin, STARTING_ROWS.end)
+    left_hand = available_starting_positions.sample
+    right_hand = (available_starting_positions.select { |position| position.in_range?(left_hand) }).sample
 
-    second_x_position = second_x_start_options.sample
-
-    @hands[:left] = set(Position.new(first_x_start, starting_row), 'start')
-    @hands[:right] = set(Position.new(second_x_position, starting_row), 'start')
+    @hands[:left] = set(left_hand, 'start')
+    @hands[:right] = set(right_hand, 'start')
   end
 
-
   def set(position, state)
+    puts "Setting: #{position} to #{state}"
     @state[position.to_s] = state
 
     position
@@ -50,9 +43,9 @@ class RouteGenerator
     @hands.values.any?(&:near_top?)
   end
 
-  def positions_above(y)
+  def available_positions(y_start, y_end = Wall::VERTICAL-1)
     positions = []
-    (y+1..Wall::VERTICAL-1).each do |y_position|
+    (y_start..y_end).each do |y_position|
       (0..Wall::HORIZONTAL-1).each do |x_position|
         positions.push(Position.new(x_position, y_position))
       end
@@ -69,15 +62,17 @@ class RouteGenerator
       other_hand = :left
     end
 
-    positions = positions_above(@hands[move_hand].y).select do |position|
+    positions = available_positions(@hands[move_hand].y + 1).select do |position|
       position.in_range?(@hands[other_hand])
     end
 
-    @last_position  = @hands[move_hand] = set(positions.sample, 'on')
-  end
+    position = positions.sample
 
-  def set_last_position
-    set(@last_position, 'finish')
+    if position.near_top?
+      @hands[move_hand] = set(position, 'finish')
+    else
+      @hands[move_hand] = set(position, 'on')
+    end
   end
 
   class Position
