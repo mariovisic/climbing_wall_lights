@@ -11,8 +11,8 @@
       <ul class="list-group mb-4">
       <% routes.each do |route| %>
         <li class="route-difficulty route-difficulty-<%= route.difficulty || 'unknown' %> list-group-item">
-          <div class="float-right">
-            <a href="/routes/<%= route.id %>/edit" class="btn btn-info mr-2">Edit</a>
+          <div class="float-end">
+            <a href="/routes/<%= route.id %>/edit" class="btn btn-info me-2">Edit</a>
             <a href="/routes/<%= route.id %>/load" class="btn btn-primary load-route-link" data-text='Load' data-loaded-text="Loaded 🧗‍♀️"></a>
           </div>
           <h4 class="route-title"><%= route.title %></h4>

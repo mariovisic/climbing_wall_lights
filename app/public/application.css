@@ -18,15 +18,15 @@
   height: 100%;
 }
 .wall-light[data-state="on"] {
-  background: var(--cyan);
+  background: var(--bs-cyan);
 }
 
 .wall-light[data-state="start"] {
-  background: var(--green);
+  background: var(--bs-green);
 }
 
 .wall-light[data-state="finish"] {
-  background: var(--red);
+  background: var(--bs-red);
 }
 
 .route-difficulty {

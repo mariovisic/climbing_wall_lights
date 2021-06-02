@@ -1,16 +1,18 @@
 <form method="post" action="/routes/<%= route.id %>" class="newRoute">
   <input type="hidden" name="_method" value="PUT">
 
-  <%= erb :_route_form, locals: { route: route } %>
+  <div class="mb-4">
+    <%= erb :_route_form, locals: { route: route } %>
+  </div>
 
-  <div class="form-group float-right">
+  <div class="float-end">
     <input type="submit" class="btn btn-primary" value="Update">
   </div>
 </form>
 
 <form method="post" action="/routes/<%= route.id %>" class="deleteRoute">
   <input type="hidden" name="_method" value="DELETE">
-  <div class="form-group">
-    <input type="submit" class="btn btn-danger" value="Delete this route">
-  </div>
+  <input type="submit" class="btn btn-danger" value="Delete this route">
 </form>
+
+<div class="row">&nbsp;</div>
