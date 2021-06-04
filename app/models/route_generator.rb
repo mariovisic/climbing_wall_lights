@@ -1,6 +1,6 @@
 class RouteGenerator
   STARTING_ROWS = 4..6
-  HAND_SPLIT_RANGE = 2..4
+  HAND_SPLIT_RANGE = 1..4
 
   def initialize
     @state = { }
@@ -62,7 +62,7 @@ class RouteGenerator
   end
 
   def set_hand_hold
-    positions = available_positions(@hands[move_hand].y + 1).select do |position|
+    positions = available_positions(@hands[move_hand].y).select do |position|
       position.in_range?(@hands[other_hand])
     end
 
