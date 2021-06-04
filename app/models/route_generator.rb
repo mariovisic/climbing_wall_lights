@@ -23,16 +23,25 @@ class RouteGenerator
 
   private
 
-  def set_start_holds
-    available_starting_positions = available_positions(STARTING_ROWS.begin, STARTING_ROWS.end)
-    left_hand = available_starting_positions.sample
-    right_hand = (available_starting_positions.select { |position| position.in_range?(left_hand) }).sample
-
-    @hands[:left] = set(left_hand, 'start')
-    @hands[:right] = set(right_hand, 'start')
+  def move_hand
+    @hands[:left].lower_than?(@hands[:right]) ?  :left : :right
   end
 
-  def set(position, state)
+  def other_hand
+    @hands[:right].lower_than?(@hands[:left]) ?  :left : :right
+  end
+
+  def set_start_holds
+    starting_positions = available_positions(STARTING_ROWS.begin, STARTING_ROWS.end)
+
+    @hands[:left] = set(starting_positions.sample, 'start')
+    @hands[:right] = set((starting_positions.select { |position| position.in_range?(@hands[:left]) }).sample, 'start')
+  end
+
+  def set(position, state=nil)
+    if state.nil?
+      state = position.near_top? ? 'finish' : 'on'
+    end
     @state[position.to_s] = state
 
     position
@@ -43,31 +52,21 @@ class RouteGenerator
   end
 
   def available_positions(y_start, y_end = Wall::VERTICAL-1)
-    positions = []
-    (y_start..y_end).each do |y_position|
-      (0..Wall::HORIZONTAL-1).each do |x_position|
-        positions.push(Position.new(x_position, y_position))
+    [].tap do |positions|
+      (y_start..y_end).each do |y_position|
+        (0..Wall::HORIZONTAL-1).each do |x_position|
+          positions.push(Position.new(x_position, y_position))
+        end
       end
     end
-    positions
   end
 
   def set_hand_hold
-    if @hands[:left].lower_than?(@hands[:right])
-      move_hand = :left
-      other_hand = :right
-    else
-      move_hand = :right
-      other_hand = :left
-    end
-
     positions = available_positions(@hands[move_hand].y + 1).select do |position|
       position.in_range?(@hands[other_hand])
     end
 
-    position = positions.sample
-
-    @hands[move_hand] = set(position, position.near_top? ? 'finish' : 'on')
+    @hands[move_hand] = set(positions.sample)
   end
 
   class Position
@@ -83,12 +82,8 @@ class RouteGenerator
     end
 
     def lower_than?(position)
-      if y == position.y
-        # If left and right hands are equal then randomly select which to move :)
-        rand(2) == 0
-      else
-        y < position.y
-      end
+      # If left and right hands are equal then randomly select which to move :)
+      y < position.y || (y == position.y && rand(2) == 0)
     end
 
     def in_range?(other_hand)
