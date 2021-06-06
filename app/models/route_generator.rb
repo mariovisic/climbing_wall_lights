@@ -89,11 +89,12 @@ class RouteGenerator
       @y_rand = rand
     end
 
+    # Allow crossed positions only 5% of the time
     def crossed?(position)
       if @side == :left
-        position.x < x
+        (position.x < x) || rand < 0.05
       else
-        position.x > x
+        position.x > x || rand < 0.05
       end
     end
 
