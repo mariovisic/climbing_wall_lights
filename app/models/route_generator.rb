@@ -28,11 +28,11 @@ class RouteGenerator
   private
 
   def move_hand
-    @hands.min { |hand_a, hand_b| hand_a.x_position <=> hand_a.x_position }
+    @hands.min { |hand_a, hand_b| hand_a.y_position <=> hand_b.y_position }
   end
 
   def other_hand
-    @hands.max { |hand_a, hand_b| hand_a.x_position <=> hand_a.x_position }
+    @hands.max { |hand_a, hand_b| hand_a.y_position <=> hand_b.y_position }
   end
 
   def set_start_holds
@@ -66,10 +66,11 @@ class RouteGenerator
 
   def set_hand_hold
     positions = available_positions(move_hand.y).select do |position|
-      position.in_range?(other_hand)
+      position != move_hand.position && position.in_range?(other_hand)
     end
 
-    set(move_hand, positions.sample)
+    position = positions.sample
+    set(move_hand, position)
   end
 
   class Hand
@@ -77,7 +78,7 @@ class RouteGenerator
 
     def_delegators :@position, :x, :y, :near_top?
 
-    attr_reader :side
+    attr_reader :side, :position
 
     def initialize(side)
       @side = side
@@ -85,12 +86,20 @@ class RouteGenerator
 
     def position=(position)
       @position = position
-      @x_rand = rand
+      @y_rand = rand
+    end
+
+    def crossed?(position)
+      if @side == :left
+        position.x < x
+      else
+        position.x > x
+      end
     end
 
     # If left and right hands are equal then randomly select which to move :)
-    def x_position
-      @position.x + @x_rand
+    def y_position
+      @position.y + @y_rand
     end
   end
 
@@ -105,7 +114,7 @@ class RouteGenerator
     def in_range?(other_hand)
       distance_to_other_hand = ((((x - other_hand.x).abs ** 2) + ((y - other_hand.y).abs ** 2)) ** 0.5)
 
-      self != other_hand && HAND_SPLIT_RANGE.include?(distance_to_other_hand)
+      self != other_hand.position && !other_hand.crossed?(self) && HAND_SPLIT_RANGE.include?(distance_to_other_hand)
     end
 
     def near_top?
