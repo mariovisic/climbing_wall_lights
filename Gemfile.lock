@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    bindata (2.4.7)
+    bindata (2.4.10)
     ffaker (2.15.0)
     kgio (2.11.3)
     mustermann (1.1.1)
