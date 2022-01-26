@@ -91,10 +91,10 @@ class Wall
   def self.load_moonboard(data)
     { 'START' => 'start', 'MOVES' => 'on', 'TOP' => 'finish' }.each do |type, state|
       data[type].each do |coordinate|
-        x = coordinate[0].ord - 64
+        x = coordinate[0].ord - 65 + 1 # our woodie has 1 extra column compared to a moonboard, so shift everything 1 to the right
         y = coordinate[1..2].to_i - 1
 
-        if x.between?(0, HORIZONTAL) && y.between?(0, VERTICAL)
+        if x.between?(0, HORIZONTAL - 1) && y.between?(0, VERTICAL - 1)
           @@state["#{x},#{y}"] = state
         end
       end
