@@ -9,6 +9,8 @@ $LOAD_PATH.push(__dir__)
 require 'sinatra'
 require 'database'
 
+require 'json'
+
 require 'models/wall'
 require 'models/route'
 require 'models/route_generator'
@@ -133,5 +135,14 @@ class ClimbingWallLightsApplication < Sinatra::Base
     Wall.toggle_power
 
     redirect '/'
+  end
+
+  post '/moonboard-set' do
+    Wall.turn_all_off
+
+    Wall.load_moonboard(JSON.parse(params[:data]))
+
+    status 200
+    body ''
   end
 end

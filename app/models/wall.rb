@@ -87,4 +87,18 @@ class Wall
 
     Lights.new(@@state, @@brightness).set
   end
+
+  def self.load_moonboard(data)
+    data['START'].each do |coordinate|
+      self.set(coordinate[0].ord - 64, coordinate[1..2].to_i - 1, 'start')
+    end
+
+    data['MOVES'].each do |coordinate|
+      self.set(coordinate[0].ord - 64, coordinate[1..2].to_i - 1, 'on')
+    end
+
+    data['TOP'].each do |coordinate|
+      self.set(coordinate[0].ord - 64, coordinate[1..2].to_i - 1, 'finish')
+    end
+  end
 end
