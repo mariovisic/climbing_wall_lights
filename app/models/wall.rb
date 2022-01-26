@@ -89,16 +89,17 @@ class Wall
   end
 
   def self.load_moonboard(data)
-    data['START'].each do |coordinate|
-      self.set(coordinate[0].ord - 64, coordinate[1..2].to_i - 1, 'start')
+    { 'START' => 'start', 'MOVES' => 'on', 'TOP' => 'finish' }.each do |type, state|
+      data[type].each do |coordinate|
+        x = coordinate[0].ord - 64
+        y = coordinate[1..2].to_i - 1
+
+        if x.between?(0, HORIZONTAL) && y.between?(0, VERTICAL)
+          @@state["#{x},#{y}"] = state
+        end
+      end
     end
 
-    data['MOVES'].each do |coordinate|
-      self.set(coordinate[0].ord - 64, coordinate[1..2].to_i - 1, 'on')
-    end
-
-    data['TOP'].each do |coordinate|
-      self.set(coordinate[0].ord - 64, coordinate[1..2].to_i - 1, 'finish')
-    end
+    Lights.new(@@state, @@brightness).set
   end
 end
